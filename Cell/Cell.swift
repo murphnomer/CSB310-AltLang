@@ -110,7 +110,7 @@ class Cell {
             self.Display.Resolution.Width = Int(match.1)!
             self.Display.Resolution.Height = Int(match.2)!
         }
-        var reso = "\(self.Display.Resolution.Height) x \(self.Display.Resolution.Width)"
+        let reso = "\(self.Display.Resolution.Height) x \(self.Display.Resolution.Width)"
         return reso
     }
     
