@@ -8,33 +8,30 @@
 import Foundation
 import SwiftCSV
 
-let cellFileURL : String = "https://raw.githubusercontent.com/murphnomer/CSB310-AltLang/main/cells.csv"
-var cells : [Cell] = []
-
-do {
-    let csv: CSV = try CSV<Named>(url: URL(string:cellFileURL)!)
-    print("CSV has \(csv.rows.count) rows")
-    for r in csv.rows {
-        var cell : Cell = Cell()
-        cell.parseManufacturer(value: r["oem"] ?? "")
-        cell.parseModel(value: r["model"] ?? "")
-        cell.parseYearAnnounced(value: r["launch_announced"] ?? "")
-        cell.parseYearReleased(value: r["launch_status"] ?? "")
-        cell.parseLaunchStatus(value: r["launch_status"] ?? "")
-        cell.parseDimensions(value: r["body_dimensions"] ?? "")
-        cell.parseWeight(value: r["body_weight"] ?? "")
-        cell.parseSIMType(value: r["body_sim"] ?? "")
-        cell.parseDisplayType(value: r["display_type"] ?? "")
-        cell.parseDisplaySize(value: r["display_size"] ?? "")
-        cell.parseDisplayResolution(value: r["display_resolution"] ?? "")
-        cell.parseFeatures(value: r["features_sensors"] ?? "")
-        cell.parseOSPlatform(value: r["platform_os"] ?? "")
-        cells.append(cell)
-        
-    }
-    print("Got \(cells.count) cell objects")
-
-} catch {
-    print(error)
+struct OEMStats {
+    var Count: Int = 0
+    var TotalWeight: Float = 0.0
 }
+
+func getUniqueOEMs(cellList: [Cell]) -> [String] {
+    var oems: Set<String> = Set()
+    for cell in cellList {
+        oems.insert(cell.Manufacturer)
+    }
+    return oems.sorted()
+}
+
+let cellFileURL: String = "https://raw.githubusercontent.com/murphnomer/CSB310-AltLang/main/cells.csv"
+var cabinet: CellCabinet
+
+cabinet = CellCabinet(cellFileURL: cellFileURL)
+
+let sortedByWeight = cabinet.averageCellWeight.sorted{ $0.1 > $1.1 }
+
+print("Count: \(sortedByWeight.count) Winner: \(sortedByWeight)")
+
+for cell in cabinet.diffReleaseYear {
+    print("\(cell.Manufacturer) \(cell.Model) was announced in \(cell.YearAnnounced!) and released in \(cell.YearReleased!).")
+}
+print("\(cabinet.onlyOneFeature.count) cells with only one feature.")
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E23347372A2BF49700B6983C /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = E23347362A2BF49700B6983C /* SwiftCSV */; };
 		E233473B2A2C0B3100B6983C /* cells.csv in Resources */ = {isa = PBXBuildFile; fileRef = E23347392A2C096200B6983C /* cells.csv */; };
+		E233473D2A2D11AC00B6983C /* CellCabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E233473C2A2D11AC00B6983C /* CellCabinet.swift */; };
 		E2E0293C2A22645B0065396D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0293B2A22645B0065396D /* main.swift */; };
 		E2E029432A2ACBBF0065396D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E029422A2ACBBF0065396D /* Cell.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		E23347392A2C096200B6983C /* cells.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cells.csv; path = Cell/cells.csv; sourceTree = SOURCE_ROOT; };
+		E233473C2A2D11AC00B6983C /* CellCabinet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCabinet.swift; sourceTree = "<group>"; };
 		E2E029382A22645B0065396D /* Cell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cell; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E0293B2A22645B0065396D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E2E029422A2ACBBF0065396D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		E2E0292F2A22645B0065396D = {
 			isa = PBXGroup;
 			children = (
+				E233473C2A2D11AC00B6983C /* CellCabinet.swift */,
 				E2E0293A2A22645B0065396D /* Cell */,
 				E2E029392A22645B0065396D /* Products */,
 			);
@@ -148,6 +151,7 @@
 			files = (
 				E2E0293C2A22645B0065396D /* main.swift in Sources */,
 				E2E029432A2ACBBF0065396D /* Cell.swift in Sources */,
+				E233473D2A2D11AC00B6983C /* CellCabinet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
