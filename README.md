@@ -5,6 +5,8 @@ For my alternative language project, I chose Swift, which is now the primary lan
 
 Swift is an OOP-native language, and very strongly supports objects across the board.  It is loosely based on Apple's previous preferred language, Objective-C which was itself an attempt to add OOP support to C.  Swift is under active development by Apple, with new versions being released annually to coincide with releases of Apple's flagship operating system platforms, such as iOS, iPadOS, MacOS, and so on.  The current version of Swift is 5.8.  
 
+Swift supports most of the standard OOP, control, looping and other constructs supported by other major programming languages such as Java and Python.  See below for some interesting differences I encountered while working on this project.
+
 ## Interesting concepts
 Below are some interesting deviations I encountered in Swift from other languages I am accustomed to using, such as Java and Python.  
 
@@ -18,6 +20,9 @@ Regular expressions in Swift are very easy to use thanks to the Regex Literal, s
 
 ### Calculated Properties
 In Swift, you can specify Calculated Properties alongside normal property variables by simply providing a code block after the name of the variable that calculates and returns the desired property value.
+
+### Resource Bundle
+While attempting to get this project to work, I tried for a long time with many failures to include the file locally.  This is not so much a function of the Swift language, but of the Apple development platform, but I was unable to get the file to show up in the Resource Bundle no matter how I tried to get it in there.  I had to resort in the end to hosting the file on GitHub and accessing it directly from there in the code.
 
 ## Libraries
 Swift only provides three native data structures: Arrays, Sets, and Dictionaries.  Other data structures can be fashioned from these either using inheritance or by using included methods to simulate the desired data structure behavior (using an Array as a Queue, for instance).
