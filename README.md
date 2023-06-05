@@ -50,3 +50,7 @@ This is a large number because the assignment specified that the value "V1" was 
 
 See below for actual output from the program:
 ![image](report_questions.png)
+
+## Required Tests
+See the following screenshot for outputs from the required tests:
+![image](testing_screenshot.png)
