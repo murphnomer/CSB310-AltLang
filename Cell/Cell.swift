@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Class to track individual Cell objects representing rows in the provided .csv file
 // CustomStringConvertible protocol allows objects to have automatic String conversion for printing and such
 class Cell: CustomStringConvertible {
     
