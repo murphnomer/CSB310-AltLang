@@ -2,17 +2,20 @@
 //  Cell.swift
 //  Cell
 //
-//  Created by Mike Murphy on 6/2/23.
+//  Created by Mike Murphy on 5/27/23.
 //
 
 import Foundation
 
+// CustomStringConvertible protocol allows objects to have automatic String conversion for printing and such
 class Cell: CustomStringConvertible {
     
+    // struct for screen dimensions
     struct Dimension2: CustomStringConvertible {
         var Width: Int = 0
         var Height: Int = 0
         
+        // Swift version of toString, convert object to String type for printing
         var description: String {
             if Width == 0 && Height == 0 {
                 return "Unknown"
@@ -22,11 +25,13 @@ class Cell: CustomStringConvertible {
         }
     }
     
+    // struct for phone body dimensions
     struct Dimension3: CustomStringConvertible {
         var Width: Float = 0.0
         var Height: Float = 0.0
         var Thickness: Float = 0.0
         
+        // Swift version of toString, convert object to String type for printing
         var description: String {
             if (Width == 0.0 && Height == 0.0 && Thickness == 0.0) {
                 return "Unknown"
@@ -36,11 +41,13 @@ class Cell: CustomStringConvertible {
         }
     }
     
+    // struct for tracking the characteristics of the phone's display screen
     struct Display: CustomStringConvertible {
         var Tech: String = ""
         var Size: Float?
         var Resolution: Dimension2 = Dimension2()
         
+        // Swift version of toString, convert object to String type for printing
         var description: String {
             if Tech == "" {
                 return ": Unknown"
@@ -50,107 +57,136 @@ class Cell: CustomStringConvertible {
         }
     }
 
+    // oem
     var Manufacturer: String = ""
+    // model
     var Model: String = ""
+    // optional: year the phone was announced
     var YearAnnounced: Int?
+    // optional: year the phone was released
     var YearReleased: Int?
+    // optional: launch status of the phone
     var LaunchStatus: String?
+    // optional: dimensions of the phone body
     var Dimensions: Dimension3?
+    // optional: weight of the phone
     var Weight: Float?
+    // optional: type of SIM card supported by the phone
     var SIMType: String?
+    // property to track properties of the display
     var Display: Display = Display()
+    // list of features and sensors supported by the phone
     var Features: String = ""
+    // operating system platform targeted by the phone at release
     var OSPlatform: String?
     
-    func parseManufacturer(value: String) -> String {
+    // determine oem property from input value based on the rules specified in the assignment
+    func parseManufacturer(value: String) {
+        // just put whatever was in the file into this property
         self.Manufacturer = value
-        return self.Manufacturer
     }
     
-    func parseModel(value: String) -> String {
+    // determine model property from input value based on the rules specified in the assignment
+    func parseModel(value: String){
+        // just put whatever was in the file into this property
         self.Model = value
-        return self.Model
     }
-    
-    func parseYearAnnounced(value: String) -> Int? {
+
+    // if a announcement year was provided , record it here
+    func parseYearAnnounced(value: String){
+        // regex to determine if a valid year was included
         if let match = value.firstMatch(of: /^(\d{4})/ ) {
+            // the first regex group captures the year, cast it to Int type
             YearAnnounced = Int(match.1)
         }
-        return self.YearAnnounced
 
     }
 
-    func parseYearReleased(value: String) -> Int? {
+    // if a release year was provided as part of the launch_status column, record it here
+    func parseYearReleased(value: String){
+        // regex to determine if a valid year was included
         if let match = value.firstMatch(of: /(\d{4})/ ) {
+            // the first regex group captures the year, cast it to Int type
             YearReleased = Int(match.1)
         }
-        return self.YearReleased
     }
 
-    func parseLaunchStatus(value: String) -> String? {
+    // if the launch_status column meets the criteria specified in the assignment, record it, otherwise leave it nil
+    func parseLaunchStatus(value: String){
+        // regex to determine if one the allowable values was provided
         if let match = value.firstMatch(of: /(\d{4}|Discontinued|Cancell?ed)/ ) {
+            // first regex group contains the allowed value
             LaunchStatus = String(match.1)
         }
-        return self.LaunchStatus
     }
     
-    func parseDimensions(value: String) -> Dimension3? {
+    // if body dimensions were provided, parse out the metric ones
+    func parseDimensions(value: String){
+        // regex to grab the metric version of the screen dimensions
         if let match = value.firstMatch(of: /([\d.]+) x ([\d.]+) x ([\d.]+) mm/ ) {
+            // create a new struct to store the body dimensions
             Dimensions = Dimension3()
+            // store the height, width, and thickness from the appropriate capture groups of the regex
             Dimensions!.Height = Float(match.1)!
             Dimensions!.Width = Float(match.2)!
             Dimensions!.Thickness = Float(match.3)!
         }
-        return self.Dimensions
     }
-    
-    func parseWeight(value: String) -> Float? {
+
+    // if the phone's weight was provided, store the metric version
+    func parseWeight(value: String){
+        // regex to grab the regex
         if let match = value.firstMatch(of: /([\d.]+) g/ ) {
             self.Weight = Float(match.1)!
         }
-        return self.Weight
     }
     
-    func parseSIMType(value: String) -> String? {
+    // if the value provided for the SIM type meets the criteria, store it
+    func parseSIMType(value: String){
         if value != "Yes" && value != "No" {
             self.SIMType = value
         }
-        return self.SIMType
     }
-    
-    func parseDisplayType(value: String) -> String {
+
+    // store the value provided for display_type in the Display struct
+    func parseDisplayType(value: String){
+        // just put whatever was in the file into this value in the object
         self.Display.Tech = value
-        return self.Display.Tech
     }
     
-    func parseDisplaySize(value: String) -> Float? {
+    // if a valid value for screen size was provided, store it in the Display struct
+    func parseDisplaySize(value: String){
+        // regex to grab the metric version of screen size
         if let match = value.firstMatch(of: /([\d.]+) cm/ ) {
+            // first group of the regex contains the size in metric units
             self.Display.Size = Float(match.1)!
         }
-        return self.Display.Size
     }
-    
-    func parseDisplayResolution(value: String) -> String {
+
+    // if a valid display resolution was provided, store it in the Display struct
+    func parseDisplayResolution(value: String){
+        // regex to grab the two dimensions of the screen resolution
         if let match = value.firstMatch(of: /([\d]+) x ([\d]+) pixels/ ) {
+            // grab the two groups and store them in the appropriate section of the struct
             self.Display.Resolution.Width = Int(match.1)!
             self.Display.Resolution.Height = Int(match.2)!
         }
-        let reso = "\(self.Display.Resolution.Height) x \(self.Display.Resolution.Width)"
-        return reso
     }
-    
-    func parseFeatures(value: String) -> String {
+
+    // grab whatever was provided for features and store it
+    func parseFeatures(value: String){
         self.Features = value
-        return self.Features
     }
     
-    func parseOSPlatform(value: String) -> String? {
+    // if platform info was provided, parse out the part specified in the assignment
+    func parseOSPlatform(value: String){
+        // regex to grab everything before the first comma (or everything if no comma)
         if let match = value.firstMatch(of: /([^,]+),?/ ) {
             self.OSPlatform = String(match.1)
         }
-        return self.OSPlatform
     }
-    
+
+    // Swift version of toString, convert object to String type for printing
     var description: String {
         var desc = ""
         desc += "\(Manufacturer) \(Model)\n"
