@@ -43,3 +43,5 @@ This is a large number because the assignment specified that the value "V1" was 
 ### What year in the 2000s had the most phones launched?
 2019 with 303 launches.
 
+See below for actual output from the program:
+![image](report_questions.png)
