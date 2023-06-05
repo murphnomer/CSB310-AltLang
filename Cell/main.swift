@@ -49,3 +49,24 @@ print()
 // and print out the smallest one
 print("The smallest overall phone is:")
 print(cabinet.smallestPhone)
+
+print("\n\n\n\n")
+
+// Required tests
+print("\(cabinet.rowsReadFromFile) rows were read from the input file, so it is not empty.")
+print()
+
+print("The body_weight variable is now type \(type(of: cabinet.cells.first?.Weight))")
+print()
+if let testCell: Cell = cabinet.findACell(oem: "Motorola", model: "V560") {
+    print("The Motorola V560, which has several missing values, has the following platform: \(testCell.OSPlatform)")
+    print("Since the procedure for processing missing data is the same, all other missing values should also be nil.")
+}
+if let testCell: Cell = cabinet.findACell(oem: "Motorola", model: "Moto Z4 Force") {
+    print("The Motorola Moto Z4 Force, which has several - values, has the following weight: \(testCell.Weight)")
+    print("Since the procedure for processing - data is the same, all other - values should also be nil.")
+}
+
+
+print("\n\n\n\n")
+

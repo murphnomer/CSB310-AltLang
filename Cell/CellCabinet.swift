@@ -14,6 +14,8 @@ class CellCabinet {
     // Array data structure to store Cell objects
     var cells: [Cell] = []
     
+    var rowsReadFromFile: Int = 0
+    
     // Calculated property to get list of unique oems in the dataset
     var oemList: [String] {
         // Set data structure to generate unique list
@@ -151,6 +153,16 @@ class CellCabinet {
         // return the temp variable
         return littleGuy.cell
     }
+    
+    // find a return a particular Cell object by oem and model
+    func findACell(oem: String, model: String) -> Cell? {
+        for cell in cells {
+            if cell.Manufacturer == oem && cell.Model == model {
+                return cell
+            }
+        }
+        return nil
+    }
 
     // constructor to build a list of Cell objects from the provided .csv file
     // NOTE: None of the methods I could find a listing for worked for accessing the file via the local "Bundle",
@@ -161,6 +173,10 @@ class CellCabinet {
         do {
             // initialize the CSV parser with the provided URL
             let csv: CSV = try CSV<Named>(url: URL(string:cellFileURL)!)
+            
+            // initialize count variable for required test
+            rowsReadFromFile = csv.rows.count
+            
             // parse all of the rows and call the Cell class' parsing functions
             for r in csv.rows {
                 let cell : Cell = Cell()
