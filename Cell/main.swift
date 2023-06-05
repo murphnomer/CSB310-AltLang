@@ -35,3 +35,8 @@ for cell in cabinet.diffReleaseYear {
 }
 print("\(cabinet.onlyOneFeature.count) cells with only one feature.")
 
+print(cabinet.phonesByYear)
+
+print("The biggest overall phone is:")
+print(cabinet.biggestPhone)
+

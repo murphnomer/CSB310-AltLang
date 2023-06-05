@@ -57,6 +57,38 @@ class CellCabinet {
         return onlyOne
     }
     
+    var phonesByYear: [Int: Int] {
+        var yearCount: [Int: Int] = [:]
+        
+        for cell in cells {
+            if ((cell.YearAnnounced ?? 0) >= 2000) {
+                if yearCount[cell.YearAnnounced!] ?? 0 == 0 {
+                    yearCount[cell.YearAnnounced!] = 1
+                } else {
+                    yearCount[cell.YearAnnounced!]! += 1
+                }
+            }
+        }
+        
+        return yearCount
+    }
+    
+    var biggestPhone: Cell {
+        var bigGuy: (size: Float, cell: Cell) = (0, Cell())
+        var size: Float = 0.0
+        
+        for cell in cells {
+            if (cell.Dimensions ?? Cell.Dimension3()).description != "Unknown" {
+                size = cell.Dimensions!.Height * cell.Dimensions!.Width * cell.Dimensions!.Thickness
+                if size > bigGuy.size {
+                    bigGuy = (size, cell)
+                }
+            }
+        }
+        
+        return bigGuy.cell
+    }
+    
     init(cellFileURL: String) {
         do {
             let csv: CSV = try CSV<Named>(url: URL(string:cellFileURL)!)
