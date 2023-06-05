@@ -129,7 +129,29 @@ class CellCabinet {
         // return the temp variable
         return bigGuy.cell
     }
-    
+
+    // Calculated property to identify the smallest overall phone as measured by volume
+    var smallestPhone: Cell {
+        // temp variable with a tuple containing the smallest phone seen so far and its total volume
+        var littleGuy: (size: Float, cell: Cell) = (1000000.0, Cell())
+        var size: Float = 0.0
+        
+        for cell in cells {
+            // if this Cell object had body size specified
+            if (cell.Dimensions ?? Cell.Dimension3()).description != "Unknown" {
+                // calculate the volume of this one
+                size = cell.Dimensions!.Height * cell.Dimensions!.Width * cell.Dimensions!.Thickness
+                // if it's the smallest yet, store it
+                if size < littleGuy.size && size > 0.0 {
+                    littleGuy = (size, cell)
+                }
+            }
+        }
+        
+        // return the temp variable
+        return littleGuy.cell
+    }
+
     // constructor to build a list of Cell objects from the provided .csv file
     // NOTE: None of the methods I could find a listing for worked for accessing the file via the local "Bundle",
     // so I had to reference the file directly from the GitHub repo.

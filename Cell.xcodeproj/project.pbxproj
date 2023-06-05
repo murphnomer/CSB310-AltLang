@@ -49,7 +49,6 @@
 		E2E0292F2A22645B0065396D = {
 			isa = PBXGroup;
 			children = (
-				E233473C2A2D11AC00B6983C /* CellCabinet.swift */,
 				E2E0293A2A22645B0065396D /* Cell */,
 				E2E029392A22645B0065396D /* Products */,
 			);
@@ -66,6 +65,7 @@
 		E2E0293A2A22645B0065396D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				E233473C2A2D11AC00B6983C /* CellCabinet.swift */,
 				E2E0293B2A22645B0065396D /* main.swift */,
 				E2E029422A2ACBBF0065396D /* Cell.swift */,
 				E23347392A2C096200B6983C /* cells.csv */,
